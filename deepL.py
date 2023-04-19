@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[10]:
-
-
 import tensorflow.compat.v1 as tf 
 import pandas as pd
 import numpy as np
