@@ -156,7 +156,7 @@ class OneCycleData:
 
 
 #電圧データ全体から単一波を返す関数
-def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=False):
+def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=False, fileName="onWave_plot"):
     data = originalData.copy()
     data.iloc[:,1] = denoise(data.iloc[:,1], wavelet="db1", level=4)
     originalData.iloc[:,1] = denoise(originalData.iloc[:,1], wavelet="db36", level=3)
@@ -203,8 +203,11 @@ def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=Fa
     if oneWave_plot:
         figure_db1 = plt.figure()
         figure_db1.add_subplot(1,1,1).plot(data.iloc[:,0], data.iloc[:,1])
+        figure_db1.savefig(fileName+"_db")
         figure_one = plt.figure()
         figure_one.add_subplot(1,1,1).plot(oneCycleDataCloseToAverage.get_data().iloc[:,0], oneCycleDataCloseToAverage.get_data().iloc[:,1])
+        figure_one.savefig(fileName+"_one")
+        plt.close()
     #最適な単一波を返す
     return oneCycleDataCloseToAverage
 
@@ -230,7 +233,6 @@ for path in path_list:
     get_oneWave(csv,allWaves_plot=True, oneWave_plot=True)
     print("↓"+path)
 """
-subprocess.run(['jupyter', 'nbconvert', '--to', 'script', 'preprocess.ipynb'])
 
 
 # # 
