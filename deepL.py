@@ -23,10 +23,6 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     X_test = X[dls.trainRow[1]:len(X)]
     y_train = y[dls.trainRow[0]:dls.trainRow[1]]
     y_test = y[dls.trainRow[1]:len(X)]
-    #k-foldがTrueなら、K分割交差検証を行う。
-    if k_fold:
-        print(k_foldCrossValidation(k_fold, X_train, y_train, dls.model, num_epoch, batch))
-        return
    
     #データで訓練
     #model = Sequential()
