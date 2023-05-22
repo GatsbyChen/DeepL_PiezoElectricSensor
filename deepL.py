@@ -67,7 +67,7 @@ pbounds = {
         'dropout': (0.1,0.4),
         'batch': (2,10)}
 options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2}
-dls.psoOpt(data ,n_iter=10, num_epoch=2000)
+dls.psoOpt(data ,n_iter=3, num_epoch=3000)
 
 
 """

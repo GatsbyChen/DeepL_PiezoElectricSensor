@@ -136,7 +136,8 @@ class FeatureValues:
             if dataList[i] <= x and x < dataList[i+1]:
                 return i
         else:
-            raise Exception("xの値がデータの範囲外です。")
+            print("xの値がデータの範囲外です。")
+            #raise Exception("xの値がデータの範囲外です。")
     def printFVs(self):
         return
 

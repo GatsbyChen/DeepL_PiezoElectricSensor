@@ -52,6 +52,7 @@ class DeepLSetting:
     
     #ベイズ最適化用の関数
     def func(self, num_layer, num_node, dropout, batch, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):
+        data_tmp = data.copy()
         nodeList = [self.num_featureValue]
         for i in range(1, int(num_layer)):
             if(i == int(num_layer)-1):
@@ -62,8 +63,8 @@ class DeepLSetting:
         self.set_modelLayerAndNode(nodeList, dropout=dropout)
         self.model_compile(loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
         #データの準備
-        X = data.iloc[:, 0:self.num_featureValue]
-        y = data.iloc[:, self.num_featureValue:len(data.columns)]
+        X = data_tmp.iloc[:, 0:self.num_featureValue]
+        y = data_tmp.iloc[:, self.num_featureValue:len(data_tmp.columns)]
         X_train = X[self.trainRow[0]:self.trainRow[1]]
         X_test = X[self.trainRow[1]:len(X)]
         y_train = y[self.trainRow[0]:self.trainRow[1]]
@@ -77,35 +78,36 @@ class DeepLSetting:
         return -40000*score[0]
     
     def func_ps(self, x, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam()):
+        print(f"num_layor:{x[:,0]}, num_node: {x[:,1]}, dropout:{x[:,2]}, batch: {x[:,3]}")
         y = []
         for i in range(len(x)):
-            y.append(-1*self.func(x[i,0], x[i,1]*100, x[i,2], x[i, 3], data=data, num_epoch=num_epoch, loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp))
+            print(x[i])
+            score = -1*self.func(x[i,0], x[i,1]*100, x[i,2], x[i, 3], data=data, num_epoch=num_epoch, loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
+            y.append(score)
         return y
 
     #NN構造をレイヤー数、ノード数、ドロップアウト、バッチ数を最適化する。(ベイズ最適化)
     def bayesOpt(self, data, pbounds,num_epoch=3000, n_iter=25, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):
         if(self.num_featureValue == None):
             raise Exception("先にset_initial関数で初期化してください。")
-        data_tmp = data.copy()
-        self.func.__func__.__defaults__ = data_tmp, num_epoch, loss_tmp, optimizer_tmp, k_fold
+        self.func.__func__.__defaults__ = data, num_epoch, loss_tmp, optimizer_tmp, k_fold
         optimizer = BayesianOptimization(f=self.func, pbounds=pbounds)
         optimizer.maximize(init_points=5, n_iter=n_iter)
     #NN構造をレイヤー数、ノード数、ドロップアウト、バッチ数を最適化する。(PSO最適化)
     def psoOpt(self, data,num_epoch=3000, n_iter=25, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam()):
         if(self.num_featureValue == None):
             raise Exception("先にset_initial関数で初期化してください。")
-        data_tmp = data.copy()
-        self.func_ps.__func__.__defaults__ = data_tmp, num_epoch, loss_tmp, optimizer_tmp
+        self.func_ps.__func__.__defaults__ = data, num_epoch, loss_tmp, optimizer_tmp
         # Grid search による最適化関数各項の重みの最適化
         #options = {"c1": [0.3, 0.5, 0.8], "c2": [0.3, 0.5, 0.8], "w": [0.2, 0.3, 0.5]}
         #g_search = GridSearch(ps.single.GlobalBestPSO, n_particles = 10, dimensions = 4,
         #options = options, objective_func = self.func_ps, iters = 5)
         #best_score, best_options = g_search.search()
         #print(f"best_options: {best_options}")
-        data_tmp = data.copy()
-        options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2} #パラメータを設定
+        data = data.copy()
+        options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2} #パラメータを設定
         bounds=((3, 2, 0.1, 1), (10, 4096, 0.4, 10)) #範囲を指定
-        optimizer = ps.single.LocalBestPSO(n_particles=10, dimensions=4, options=options, bounds=bounds)
+        optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=4, options=options, bounds=bounds)
         cost, pos = optimizer.optimize(self.func_ps, n_iter, verbose=1)
     
     #K分割交差検証
