@@ -131,7 +131,7 @@ class OneCycleData:
     #xの値が一周期のデータの範囲内か判定する。
     def check_withinData(self, xList: list[float]):
         for x in xList:
-            if x < 0 or x > self._cycle:
+            if x <= 0 or x >= self._cycle:
                 return False
         else:
             True
@@ -193,7 +193,7 @@ def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=Fa
             i_last = i
         i += 1
     #単一波一覧をプロット
-    if(allWaves_plot):
+    if allWaves_plot:
         figure_original = plt.figure()
         figure_original.add_subplot(1,1,1).plot(originalData.iloc[:,0], originalData.iloc[:,1])
         figure = plt.figure()

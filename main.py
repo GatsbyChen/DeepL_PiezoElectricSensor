@@ -58,7 +58,7 @@ for path in path_list:
     fValueList.append(fValue)
     targetVarList.append([csv["SBP"][0], csv["DBP"][0]])
     
-data = exportCSV(fValueList, targetVarList, "out0512.csv")
+data = exportCSV(fValueList, targetVarList, "out0523.csv")
 
 #data = pd.read_csv("out4.csv")
 #deepL.deepL(data)

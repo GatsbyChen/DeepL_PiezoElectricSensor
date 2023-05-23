@@ -53,7 +53,7 @@ class FeatureValues:
         #AGの計算
         self.AG = oneCycleData.get_cycle()
         #AE_AGの計算
-        peakList = oneCycleData.get_peak(plot=False)
+        peakList = oneCycleData.get_peak(plot=True)
         self.AE_AG = peakList[3]/self.AG
         #EG_AGの計算
         EG = self.AG - peakList[3]
@@ -131,7 +131,7 @@ class FeatureValues:
         
     #xの値から一周期データのインデックスを返す。
     def XvalueToIndex(self, x):
-        dataList = self.data.iloc[:,1]
+        dataList = self.data.iloc[:,0]
         for i in range(0, len(dataList)-1):
             if dataList[i] <= x and x < dataList[i+1]:
                 return i
@@ -142,9 +142,9 @@ class FeatureValues:
         return
 
 #テスト
-csv = pd.read_csv("C:/Users/azlab/OneDrive - 国立大学法人東海国立大学機構/ドキュメント/PZT圧電センサ/BPDatas/KI_20230222_1810.CSV")
-oneCycleData = pp.get_oneWave(csv,oneWave_plot=False, allWaves_plot=False)   
-fv = FeatureValues(oneCycleData)
+#csv = pd.read_csv("C:/Users/azlab/OneDrive - 国立大学法人東海国立大学機構/ドキュメント/PZT圧電センサ/BPDatas/KI_20230222_1810.CSV")
+#oneCycleData = pp.get_oneWave(csv,oneWave_plot=False, allWaves_plot=False)   
+#fv = FeatureValues(oneCycleData)
 #print(vars(fv))
 
 
