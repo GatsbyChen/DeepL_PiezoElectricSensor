@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[30]:
-
+import tensorflow as tf 
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
@@ -87,6 +87,7 @@ class DeepLSetting:
         return y
 
     #NN構造をレイヤー数、ノード数、ドロップアウト、バッチ数を最適化する。(ベイズ最適化)
+ 
     def bayesOpt(self, data, pbounds,num_epoch=3000, n_iter=25, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):
         if(self.num_featureValue == None):
             raise Exception("先にset_initial関数で初期化してください。")

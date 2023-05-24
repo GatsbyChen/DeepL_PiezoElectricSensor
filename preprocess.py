@@ -74,7 +74,7 @@ class OneCycleData:
             A, B, C, D,mu_x1, mu_x2, mu_x3,mu_x4, sigma_x1, sigma_x2, sigma_x3,sigma_x4= popt
             peakList = [mu_x1, mu_x2, mu_x3, mu_x4] #極大値のｘ座標のリスト
             #初期値の更新
-            guess = [random.random(),random.random(),random.random(),random.random(),self._maxValue_x,random.random(),random.random(),random.random(),2,2,2,2]
+            guess = [random.random(), random.random(), random.random(), random.random(), self._maxValue_x, random.uniform(0.05,0.8), random.uniform(0.05,0.8), random.uniform(0.05,0.8), 2, 2, 2, 2]
         peakList.sort()
         
          #plot=Trueが指定されたとき、導出したガウス関数をプロットする

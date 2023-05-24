@@ -109,6 +109,7 @@ class FeatureValues:
             area_dia += self.data.iloc[i,1]*deltaTime
         self.S_sys = area_sys/self.S
         self.S_dia = area_dia/self.S
+      
       #周波数領域の特徴量の計算
         dt = 0.003
         fs = 1/dt

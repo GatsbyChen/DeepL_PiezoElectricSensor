@@ -46,17 +46,17 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
         print(f"テストデータのMSE: {score[0]*40000}, MAE:{score[1]*200}")
         y_test = y_test*200
         print(f"実際のトレーニングデータ_y\n{y_train*200}")
-        print(f"予測トレーニングデータ_y\n{dls.model.predict(X_train*200, verbose=0)}")
+        print(f"予測トレーニングデータ_y\n{dls.model.predict(X_train, verbose=0)*200}")
         print(f"実際のテストデータ_y\n{y_test}")
-        print(f"予測テストデータ_y\n{dls.model.predict(X_test*200, verbose=0)}")
+        print(f"予測テストデータ_y\n{dls.model.predict(X_test, verbose=0)*200}")
         
     return -40000*score[0]
     
 
 """
 dls = DeepLSetting()
-dls.set_initial(19,2,[0,12])
-data = pd.read_csv("out0417_1.csv")
+dls.set_initial(39,2,[0,20])
+data = pd.read_csv("out0524.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
@@ -64,26 +64,26 @@ data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
 pbounds = {
         'num_layer': (3,7),
-        'num_node': (1,1024),
+        'num_node': (1,2048),
         'dropout': (0.1,0.4),
-        'batch': (2,10)}
+        'batch': (2,20)}
 options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2}
-dls.psoOpt(data ,n_iter=3, num_epoch=3000)
+dls.bayesOpt(data , pbounds=pbounds, num_epoch=5000)
 """
 
 
 dls = DeepLSetting()
-dls.set_initial(19,2,[0,12])
-dls.set_modelLayerAndNode([19,742,742,742,742,742,2], dropout=0.1)
+dls.set_initial(39,2,[0,20])
+dls.set_modelLayerAndNode([39,929,929,929,929,2], dropout=0.3)
 dls.model_compile()
 dls.model.summary()
-data = pd.read_csv("out0417_1.csv")
+data = pd.read_csv("out0524.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
-deepL_keras(data, dls, 100000, 2, plot=True)#k_fold=5)
+deepL_keras(data, dls, 10000, 10, plot=True)#k_fold=5)
 
 
 
