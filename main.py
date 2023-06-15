@@ -47,18 +47,20 @@ def exportCSV(FeatureValueList, targetVarList, name):
 
 #BPDatas配下の各ファイルから特徴量と目的変数を取得する
 
-path_list=glob.glob(r"C:\Users\azlab\OneDrive - 国立大学法人東海国立大学機構\ドキュメント\PZT圧電センサ\BPDatas_tmp" + '/*')
+#path_list=glob.glob(r"C:\Users\azlab\OneDrive - 国立大学法人東海国立大学機構\ドキュメント\PZT圧電センサ\BPDatas_tmp" + '/*')
+path_list = glob.glob("/Users/inayoshikouya/Downloads/230614/*")
+print(f"てすっとだよ\n{path_list}")
 fValueList = []
 targetVarList = []
 #各データをFV（特徴量）に変換
 for path in path_list:
-    csv = pd.read_csv(path)
+    csv = pd.read_csv(path, encoding="shift-jis")
     print("↓"+path)
     fValue = fv.convertToFV(csv, plot=True, fileName=os.path.basename(path).split('.', 1)[0])
     fValueList.append(fValue)
     targetVarList.append([csv["SBP"][0], csv["DBP"][0]])
     
-data = exportCSV(fValueList, targetVarList, "out0526.csv")
+data = exportCSV(fValueList, targetVarList, "out0614.csv")
 
 #data = pd.read_csv("out4.csv")
 #deepL.deepL(data)

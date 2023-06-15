@@ -1,21 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[15]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
 import pandas as pd
 from scipy.optimize import curve_fit
-import subprocess
-import os.path
-import pathlib
 import random
-import glob
-
-# jupyter nbconvert --to script *.ipynb
 
 #ガウスフィッティングで使う関数
 def gauss2(x, *params):
@@ -129,7 +117,7 @@ class OneCycleData:
         return peakList
     
     #xの値が一周期のデータの範囲内か判定する。
-    def check_withinData(self, xList: list[float]):
+    def check_withinData(self, xList):
         for x in xList:
             if x <= 0 or x >= self._cycle:
                 return False
@@ -194,20 +182,26 @@ def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=Fa
         i += 1
     #単一波一覧をプロット
     if allWaves_plot:
-        figure_original = plt.figure()
-        figure_original.add_subplot(1,1,1).plot(originalData.iloc[:,0], originalData.iloc[:,1])
-        figure = plt.figure()
+        figure_original = plt.figure().add_subplot(1,1,1)
+        figure_original.set_title("Original Data")
+        figure_original.plot(originalData.iloc[:,0], originalData.iloc[:,1])
         i=0
+        figure_cut = plt.figure()
+        figure_cut.suptitle("Divided Original Data")
         for i in range(len(cycleList)-1):
-            figure.add_subplot(1,len(cycleList)-1,i+1).plot(originalData.iloc[cycleList[i]:cycleList[i+1],1])
+            figure_cut.add_subplot(1,len(cycleList)-1,i+1).plot(originalData.iloc[cycleList[i]:cycleList[i+1],1])
+        plt.show()
     if oneWave_plot:
-        figure_db1 = plt.figure()
-        figure_db1.add_subplot(1,1,1).plot(data.iloc[:,0], data.iloc[:,1])
-        figure_db1.savefig(fileName+"_db")
-        figure_one = plt.figure()
-        figure_one.add_subplot(1,1,1).plot(oneCycleDataCloseToAverage.get_data().iloc[:,0], oneCycleDataCloseToAverage.get_data().iloc[:,1])
-        figure_one.savefig(fileName+"_one")
-        plt.close()
+        figure_db1 = plt.figure().add_subplot(1,1,1)
+        figure_db1.set_title("Noise-processed Data In DB1")
+        figure_db1.plot(data.iloc[:,0], data.iloc[:,1])
+        #figure_db1.savefig(fileName+"_db")
+        figure_one = plt.figure().add_subplot(1,1,1)
+        figure_one.set_title("Single Extracted From Original Data")
+        figure_one.plot(oneCycleDataCloseToAverage.get_data().iloc[:,0], oneCycleDataCloseToAverage.get_data().iloc[:,1])
+        #figure_one.savefig(fileName+"_one")
+        plt.show()
+        #plt.close()
     #最適な単一波を返す
     return oneCycleDataCloseToAverage
 
@@ -223,22 +217,8 @@ def denoise(x, wavelet='sym20',level=1):
     return pywt.waverec(coeff, wavelet, mode='per')
 
 #テスト
-#csv = pd.read_csv(r"C:\Users\azlab\OneDrive - 国立大学法人東海国立大学機構\ドキュメント\PZT圧電センサ\BPDatas\KI_20230217_1710_afterRunning.CSV")
-#oneWave = get_oneWave(csv,allWaves_plot=True)
-
-"""
-path_list=glob.glob(r"C:/Users/azlab/OneDrive - 国立大学法人東海国立大学機構/ドキュメント/PZT圧電センサ/BPDatas" + '/*')
-for path in path_list:
-    csv = pd.read_csv(path)
-    get_oneWave(csv,allWaves_plot=True, oneWave_plot=True)
-    print("↓"+path)
-"""
-
-
-# # 
-
-# In[ ]:
-
+#csv = pd.read_csv("/Users/inayoshikouya/Downloads/DeepL_PiezoElectricSensor/BPDatas/KI_20230523_1551.CSV")
+#oneWave = get_oneWave(csv,allWaves_plot=True, oneWave_plot=True)
 
 
 
