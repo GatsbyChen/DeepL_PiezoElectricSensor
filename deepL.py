@@ -83,7 +83,7 @@ data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
-deepL_keras(data, dls, 50000, 10, plot=True)#k_fold=5)
+deepL_keras(data, dls, 5000, 10, plot=True)#k_fold=5)
 
 
 
