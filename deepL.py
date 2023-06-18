@@ -74,7 +74,7 @@ dls.bayesOpt(data , pbounds=pbounds, num_epoch=5000)
 
 dls = DeepLSetting()
 dls.set_initial(39,2,[0,39])
-dls.set_modelLayerAndNode([39,929,929,929,929,2], dropout=0.3)
+dls.set_modelLayerAndNode([39,512,512,2], dropout=0.2)
 dls.model_compile()
 dls.model.summary()
 data = pd.read_csv("out0619.csv")
@@ -83,7 +83,7 @@ data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
-deepL_keras(data, dls, 5000, 10, plot=True)#k_fold=5)
+deepL_keras(data, dls, 10000, 10, plot=True)#k_fold=5)
 
 
 
