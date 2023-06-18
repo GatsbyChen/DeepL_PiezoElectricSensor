@@ -28,7 +28,7 @@ def exportCSV(inputURL, outputURL):
         
     data = pd.DataFrame()
     idx = 0
-    for featureValue in FeatureValueList:   
+    for featureValue in fValueList:   
         #最初にDataFrameオブジェクトを作成する
         if idx == 0:
             data = pd.DataFrame({"A'G'": featureValue.AG, "A'E'/A'G'": featureValue.AE_AG, "E'G'/A'G'": featureValue.EG_AG, "A'C'/A'G'": featureValue.AC_AG, "C'E'/A'G'": featureValue.CE_AG, "A'B'/A'C'": featureValue.AB_AC, "B'C'/A'C'": featureValue.BC_AC, "C'D'/C'E'": featureValue.CD_CE, "D'E'/C'E'": featureValue.DE_CE, "E'F'/E'G'": featureValue.EF_EG, "F'G'/E'G'": featureValue.FG_EG, "H": featureValue.H, "f/H": featureValue.f_H, "g/H": featureValue.g_H, "i/H": featureValue.i_H, "H/A'B'": featureValue.H_AB, "S": featureValue.S, "S_sys/S": featureValue.S_sys, "S_dia/S": featureValue.S_dia}, index=[idx])

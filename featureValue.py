@@ -18,7 +18,7 @@ from scipy import interpolate
 
 #CSVを受け取って、特徴量クラスを返す。
 def convertToFV(originalData: pd.DataFrame, plot=False, fileName="onWave_plot"):
-    oneCycleData = pp.get_oneWave(originalData,oneWave_plot=plot, allWaves_plot=True, fileName=fileName)   
+    oneCycleData = pp.get_oneWave(originalData,oneWave_plot=plot, allWaves_plot=False, fileName=fileName)   
     featureValues = FeatureValues(oneCycleData)
     return featureValues
 

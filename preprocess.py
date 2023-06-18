@@ -190,17 +190,17 @@ def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=Fa
         figure_cut.suptitle("Divided Original Data")
         for i in range(len(cycleList)-1):
             figure_cut.add_subplot(1,len(cycleList)-1,i+1).plot(originalData.iloc[cycleList[i]:cycleList[i+1],1])
-        plt.show()
+        
     if oneWave_plot:
-        figure_db1 = plt.figure().add_subplot(1,1,1)
-        figure_db1.set_title("Noise-processed Data In DB1")
-        figure_db1.plot(data.iloc[:,0], data.iloc[:,1])
+        #figure_db1 = plt.figure().add_subplot(1,1,1)
+        #figure_db1.set_title("Noise-processed Data In DB1")
+        #figure_db1.plot(data.iloc[:,0], data.iloc[:,1])
         #figure_db1.savefig(fileName+"_db")
         figure_one = plt.figure().add_subplot(1,1,1)
         figure_one.set_title("Single Extracted From Original Data")
         figure_one.plot(oneCycleDataCloseToAverage.get_data().iloc[:,0], oneCycleDataCloseToAverage.get_data().iloc[:,1])
-        #figure_one.savefig(fileName+"_one")
-        plt.show()
+        figure_one.savefig(fileName+"_one")
+        plt.close()
         #plt.close()
     #最適な単一波を返す
     return oneCycleDataCloseToAverage
