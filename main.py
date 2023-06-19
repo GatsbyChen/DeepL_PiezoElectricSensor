@@ -53,4 +53,4 @@ def exportCSV(inputURL, outputURL):
     return data
 
 
-data = exportCSV("/home/k_inayoshi/DeepL_PiezoElectricSensor/BPDatas_tmp2/*", "/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0619.csv")
+data = exportCSV("/home/k_inayoshi/DeepL_PiezoElectricSensor/BPDatas_tmp2/*", "/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0619_tmp.csv")
