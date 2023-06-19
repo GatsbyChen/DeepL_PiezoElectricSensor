@@ -110,7 +110,11 @@ class DeepLSetting:
         bounds=((3, 2, 0.1, 1), (10, 4096, 0.4, 10)) #範囲を指定
         optimizer = ps.single.LocalBestPSO(n_particles=100, dimensions=4, options=options, bounds=bounds)
         cost, pos = optimizer.optimize(self.func_ps, n_iter, verbose=1)
-    
+        f = open('sample.txt', 'w', encoding='UTF-8')
+        f.write(f"cost:{cost}")
+        f.write(f"pos:{pos}")
+        f.close()
+
     #K分割交差検証
     def k_foldCrossValidation(self, k, X_train, y_train, nodeList, dropout, num_epoch, batch, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam()):
         kf = KFold(n_splits=k, shuffle=True)
