@@ -74,8 +74,8 @@ dls.psoOpt(data, 1000, 2)
 
 
 dls = DeepLSetting()
-dls.set_initial(39,2,[0,39])
-dls.set_modelLayerAndNode([39,512,512,2], dropout=0.2)
+dls.set_initial(40,2,[0,44])
+dls.set_modelLayerAndNode([40,512,512,2], dropout=0.2)
 dls.model_compile()
 dls.model.summary()
 data = pd.read_csv("out0626.csv")
