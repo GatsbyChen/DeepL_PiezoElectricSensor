@@ -54,13 +54,12 @@ class OneCycleData:
         guess = [1,1,1,1,self._maxValue_x,0,0,0,2,2,2,2]
         peakList = [-1,-1,-1,-1]
         #ピーク値がデータの範囲内に収まるまで繰り返す
-        popt = None
+        popt = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
         while self.check_withinData(peakList) == False:
-            while popt == None:
-                try:
-                    popt, pcov = curve_fit(gauss2, self._data.iloc[:,0], self._data.iloc[:,1], guess)
-                except:
-                    pass
+            try:
+                popt, pcov = curve_fit(gauss2, self._data.iloc[:,0], self._data.iloc[:,1], guess)
+            except:
+                pass
             A, B, C, D,mu_x1, mu_x2, mu_x3,mu_x4, sigma_x1, sigma_x2, sigma_x3,sigma_x4= popt
             peakList = [mu_x1, mu_x2, mu_x3, mu_x4] #極大値のｘ座標のリスト
             #初期値の更新
