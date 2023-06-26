@@ -78,7 +78,7 @@ dls.set_initial(40,2,[0,44])
 dls.set_modelLayerAndNode([40,512,512,2], dropout=0.2)
 dls.model_compile()
 dls.model.summary()
-data = pd.read_csv("out0626.csv")
+data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
