@@ -78,10 +78,8 @@ class DeepLSetting:
         return -40000*score[0]
     
     def func_ps(self, x, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam()):
-        print(f"num_layor:{x[:,0]}, num_node: {x[:,1]}, dropout:{x[:,2]}, batch: {x[:,3]}")
         y = []
         for i in range(len(x)):
-            print(x[i])
             score = -1*self.func(x[i,0], x[i,1]*100, x[i,2], x[i, 3], data=data, num_epoch=num_epoch, loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
             y.append(score)
         return y
