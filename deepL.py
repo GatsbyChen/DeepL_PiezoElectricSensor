@@ -56,7 +56,7 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
 
 dls = DeepLSetting()
 dls.set_initial(39,2,[0,39])
-data = pd.read_csv("out0626.csv")
+data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
