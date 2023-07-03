@@ -53,10 +53,10 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     return -40000*score[0]
     
 
-"""
+
 dls = DeepLSetting()
 dls.set_initial(39,2,[0,39])
-data = pd.read_csv("out0619.csv")
+data = pd.read_csv("out0626.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
@@ -68,11 +68,11 @@ pbounds = {
         'dropout': (0.1,0.4),
         'batch': (2,20)}
 options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2}
-dls.psoOpt(data, 1000, 2)
+dls.psoOpt(data, 20000, 500)
 #dls.bayesOpt(data , pbounds=pbounds, num_epoch=5000)
+
+
 """
-
-
 dls = DeepLSetting()
 dls.set_initial(40,2,[0,44])
 dls.set_modelLayerAndNode([40,512,512,2], dropout=0.2)
@@ -85,7 +85,7 @@ data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
 deepL_keras(data, dls, 100, 10, plot=True)#k_fold=5)
-
+"""
 
 
 
