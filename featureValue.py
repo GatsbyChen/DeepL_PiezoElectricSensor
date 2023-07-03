@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd 
@@ -147,16 +141,5 @@ class FeatureValues:
 #oneCycleData = pp.get_oneWave(csv,oneWave_plot=False, allWaves_plot=False)   
 #fv = FeatureValues(oneCycleData)
 #print(vars(fv))
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 

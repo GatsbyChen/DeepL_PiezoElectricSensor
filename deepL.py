@@ -49,7 +49,7 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
         print(f"予測トレーニングデータ_y\n{dls.model.predict(X_train, verbose=0)*200}")
         print(f"実際のテストデータ_y\n{y_test}")
         print(f"予測テストデータ_y\n{dls.model.predict(X_test, verbose=0)*200}")
-        
+    dls.model.save("my_model")
     return -40000*score[0]
     
 
@@ -84,7 +84,7 @@ data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
-deepL_keras(data, dls, 10000, 10, plot=True)#k_fold=5)
+deepL_keras(data, dls, 100, 10, plot=True)#k_fold=5)
 
 
 

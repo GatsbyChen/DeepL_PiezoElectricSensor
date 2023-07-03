@@ -1,5 +1,6 @@
-/SampleProgram/
-/BPDatas_error/
-/References/
-/BlueToothSample/
+SampleProgram/
+BPDatas_error/
+References/
+BlueToothSample/
+TrainingData/
 *.sh

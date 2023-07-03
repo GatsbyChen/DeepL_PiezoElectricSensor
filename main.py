@@ -22,7 +22,7 @@ def exportCSV(inputURL, outputURL):
     for path in path_list:
         csv = pd.read_csv(path, encoding="shift-jis")
         print("↓"+path)
-        fValue = fv.convertToFV(csv, plot=True, fileName=os.path.basename(path).split('.', 1)[0])
+        fValue = fv.convertToFV(csv, plot=False, fileName=os.path.basename(path).split('.', 1)[0])
         fValueList.append(fValue)
         targetVarList.append([csv["SBP"][0], csv["DBP"][0]])
         
@@ -52,5 +52,5 @@ def exportCSV(inputURL, outputURL):
     data.to_csv(outputURL, sep=',', encoding='utf-8')
     return data
 
-
+#data = exportCSV("/Users/inayoshikoya/Library/CloudStorage/OneDrive-国立大学法人東海国立大学機構/ドキュメント/DeepL_PiezoElectricSensor/BPDatas/*", "/Users/inayoshikoya/Library/CloudStorage/OneDrive-国立大学法人東海国立大学機構/ドキュメント/DeepL_PiezoElectricSensor/TrainingData")
 data = exportCSV("/home/k_inayoshi/DeepL_PiezoElectricSensor/BPDatas/*", "/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
