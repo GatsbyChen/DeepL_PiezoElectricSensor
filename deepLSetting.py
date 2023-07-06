@@ -60,8 +60,10 @@ class DeepLSetting:
                 break
             nodeList.append(int(num_node))
         self.model = Sequential() #モデルの初期化
-        self.set_modelLayerAndNode(nodeList, dropout=dropout)
-        self.model_compile(loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
+        self.set_modelLayerAndNode(nodeList, dropout=dropout) #モデル構造の定義
+        strategy = tf.distribute.MirroredStrategy() #分散ストラテジーの作成
+        with strategy.scope():
+            self.model_compile(loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
         #データの準備
         X = data_tmp.iloc[:, 0:self.num_featureValue]
         y = data_tmp.iloc[:, self.num_featureValue:len(data_tmp.columns)]
