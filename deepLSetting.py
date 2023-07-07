@@ -21,6 +21,7 @@ class DeepLSetting:
         self.trainRow = None #学習データの割合
         self.model = Sequential()#学習モデル。
         self.num_nodeList = None #レイヤーの配列。
+        self.strategy = tf.distribute.MirroredStrategy() #分散ストラテジーの作成
     
     #説明変数の数、目的変数の数、学習データの割合を設定する。
     def set_initial(self,  num_featureValue, num_output, trainRow):
@@ -45,10 +46,11 @@ class DeepLSetting:
 
     #モデルをコンパイルする。
     def model_compile(self, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), metrics_tmp=["mae"]):
-        self.model.compile(
-        loss = loss_tmp,
-        optimizer=optimizer_tmp,
-        metrics=metrics_tmp)
+        with self.strategy.scope():
+            self.model.compile(
+            loss = loss_tmp,
+            optimizer=optimizer_tmp,
+            metrics=metrics_tmp)
     
     #ベイズ最適化用の関数
     def func(self, num_layer, num_node, dropout, batch, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):
@@ -59,10 +61,9 @@ class DeepLSetting:
                 nodeList.append(self.num_output)
                 break
             nodeList.append(int(num_node))
-        self.model = Sequential() #モデルの初期化
-        self.set_modelLayerAndNode(nodeList, dropout=dropout) #モデル構造の定義
-        strategy = tf.distribute.MirroredStrategy() #分散ストラテジーの作成
-        with strategy.scope():
+        with self.strategy.scope():
+            self.model = Sequential() #モデルの初期化
+            self.set_modelLayerAndNode(nodeList, dropout=dropout) #モデル構造の定義
             self.model_compile(loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
         #データの準備
         X = data_tmp.iloc[:, 0:self.num_featureValue]
@@ -75,14 +76,15 @@ class DeepLSetting:
         if k_fold:
             return -40000*self.k_foldCrossValidation(k_fold, X_train, y_train, nodeList, dropout, num_epoch=num_epoch, batch=int(batch), loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
         #学習
-        history = self.model.fit(X_train, y_train, batch_size=int(batch), epochs=num_epoch, verbose=0)
-        score = self.model.evaluate(X_test, y_test, verbose=0)
+        with self.strategy.scope():
+            history = self.model.fit(X_train, y_train, batch_size=int(batch), epochs=num_epoch, verbose=0)
+            score = self.model.evaluate(X_test, y_test, verbose=0)
         return -40000*score[0]
     
     def func_ps(self, x, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam()):
         y = []
         for i in range(len(x)):
-            score = -1*self.func(x[i,0], x[i,1]*100, x[i,2], x[i, 3], data=data, num_epoch=num_epoch, loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
+            score = -1*self.func(x[i,0], x[i,1], x[i,2], x[i, 3], data=data, num_epoch=num_epoch, loss_tmp=loss_tmp, optimizer_tmp=optimizer_tmp)
             y.append(score)
         return y
 
@@ -108,7 +110,7 @@ class DeepLSetting:
         data = data.copy()
         options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2} #パラメータを設定
         bounds=((3, 2, 0.1, 1), (10, 4096, 0.4, 5)) #範囲を指定
-        optimizer = ps.single.LocalBestPSO(n_particles=50, dimensions=4, options=options, bounds=bounds)
+        optimizer = ps.single.LocalBestPSO(n_particles=1000, dimensions=4, options=options, bounds=bounds)
         cost, pos = optimizer.optimize(self.func_ps, n_iter, verbose=1)
         f = open('sample.txt', 'w', encoding='UTF-8')
         f.write(f"cost:{cost}")
@@ -136,9 +138,6 @@ class DeepLSetting:
             all_test_loss.append(score[0])
         ave_all_test_loss = np.mean(all_test_loss)
         return ave_all_test_loss
-
-
-# In[ ]:
 
 
 

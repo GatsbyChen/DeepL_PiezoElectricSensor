@@ -143,3 +143,253 @@
 2023-05-24 13:37:27,958 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x000001A89511A040> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
 2023-05-24 15:57:42,937 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x000001C68D507790> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
 2023-05-24 15:58:12,206 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x000001C68D6AB1F0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-06 17:36:15,025 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 17:38:12,981 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 17:39:01,829 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 17:39:01,873 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 17:41:45,262 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:19:30,182 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:20:06,938 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:20:07,278 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:20:07,284 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:23:40,248 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:23:40,265 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:23:40,271 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:31:55,892 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:31:55,916 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:31:55,921 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:31:56,085 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:31:56,087 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:31:56,639 - tensorflow - INFO - Error reported to Coordinator: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_3/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+Traceback (most recent call last):
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/training/coordinator.py", line 293, in stop_on_exception
+    yield
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/distribute/mirrored_run.py", line 387, in run
+    self.main_result = self.main_fn(*self.main_args, **self.main_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1249, in run_step
+    outputs = model.train_step(data)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1051, in train_step
+    loss = self.compute_loss(x, y, y_pred, sample_weight)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1109, in compute_loss
+    return self.compiled_loss(
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/compile_utils.py", line 265, in __call__
+    loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 142, in __call__
+    losses = call_fn(y_true, y_pred)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 268, in call
+    return ag_fn(y_true, y_pred, **self._fn_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 1470, in mean_squared_error
+    return backend.mean(tf.math.squared_difference(y_pred, y_true), axis=-1)
+ValueError: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_3/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+2023-07-06 22:40:27,917 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:40:27,934 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:40:27,940 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:40:28,310 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:40:28,311 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:40:28,659 - tensorflow - INFO - Error reported to Coordinator: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_5/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+Traceback (most recent call last):
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/training/coordinator.py", line 293, in stop_on_exception
+    yield
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/distribute/mirrored_run.py", line 387, in run
+    self.main_result = self.main_fn(*self.main_args, **self.main_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1249, in run_step
+    outputs = model.train_step(data)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1051, in train_step
+    loss = self.compute_loss(x, y, y_pred, sample_weight)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1109, in compute_loss
+    return self.compiled_loss(
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/compile_utils.py", line 265, in __call__
+    loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 142, in __call__
+    losses = call_fn(y_true, y_pred)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 268, in call
+    return ag_fn(y_true, y_pred, **self._fn_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 1470, in mean_squared_error
+    return backend.mean(tf.math.squared_difference(y_pred, y_true), axis=-1)
+ValueError: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_5/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+2023-07-06 22:40:43,269 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:40:43,283 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:40:43,289 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:40:43,356 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:40:43,357 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:40:43,664 - tensorflow - INFO - Error reported to Coordinator: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_1/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+Traceback (most recent call last):
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/training/coordinator.py", line 293, in stop_on_exception
+    yield
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/distribute/mirrored_run.py", line 387, in run
+    self.main_result = self.main_fn(*self.main_args, **self.main_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1249, in run_step
+    outputs = model.train_step(data)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1051, in train_step
+    loss = self.compute_loss(x, y, y_pred, sample_weight)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1109, in compute_loss
+    return self.compiled_loss(
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/compile_utils.py", line 265, in __call__
+    loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 142, in __call__
+    losses = call_fn(y_true, y_pred)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 268, in call
+    return ag_fn(y_true, y_pred, **self._fn_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 1470, in mean_squared_error
+    return backend.mean(tf.math.squared_difference(y_pred, y_true), axis=-1)
+ValueError: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_1/BiasAdd, Cast_1)' with input shapes: [?,2], [?,3].
+2023-07-06 22:47:01,671 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:47:01,687 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:47:01,692 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:47:01,834 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:47:01,835 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:48:12,020 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:48:12,037 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:48:12,042 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:48:12,195 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:48:12,197 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:48:12,498 - tensorflow - INFO - Error reported to Coordinator: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_3/BiasAdd, Cast)' with input shapes: [3,2], [3,3].
+Traceback (most recent call last):
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/training/coordinator.py", line 293, in stop_on_exception
+    yield
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/distribute/mirrored_run.py", line 387, in run
+    self.main_result = self.main_fn(*self.main_args, **self.main_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1249, in run_step
+    outputs = model.train_step(data)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1051, in train_step
+    loss = self.compute_loss(x, y, y_pred, sample_weight)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/training.py", line 1109, in compute_loss
+    return self.compiled_loss(
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/engine/compile_utils.py", line 265, in __call__
+    loss_value = loss_obj(y_t, y_p, sample_weight=sw)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 142, in __call__
+    losses = call_fn(y_true, y_pred)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 689, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/autograph/impl/api.py", line 458, in _call_unconverted
+    return f(*args, **kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 268, in call
+    return ag_fn(y_true, y_pred, **self._fn_kwargs)
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/Users/inayoshikoya/anaconda3/envs/tensorflow/lib/python3.10/site-packages/keras/losses.py", line 1470, in mean_squared_error
+    return backend.mean(tf.math.squared_difference(y_pred, y_true), axis=-1)
+ValueError: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_error/SquaredDifference}} = SquaredDifference[T=DT_FLOAT](sequential_1/dense_3/BiasAdd, Cast)' with input shapes: [3,2], [3,3].
+2023-07-06 22:52:46,899 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:52:46,915 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:52:46,921 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:52:47,039 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:52:47,040 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:52:57,012 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:52:57,013 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:52:57,138 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:52:57,139 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:55:42,266 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 22:55:42,281 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:55:42,286 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:56:05,292 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:56:05,293 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:58:52,313 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 22:58:52,317 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 22:58:52,326 - pyswarms.single.local_best - INFO - Optimize for 500 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 23:01:59,683 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fceb4a1ef80> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-06 23:02:48,700 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fceb49e3490> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-06 23:04:36,499 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 23:04:36,504 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 23:04:36,516 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 23:13:18,676 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-06 23:13:18,679 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-06 23:13:18,688 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-06 23:14:30,113 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7ff348e02710> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-06 23:15:00,029 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7ff3478f7f40> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 01:51:01,838 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 01:51:01,842 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 01:51:23,549 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 01:51:23,552 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 01:51:23,560 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 01:51:35,434 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd5d7b26e60> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 01:51:41,390 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd5d7b27b50> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 01:53:02,266 - pyswarms.single.local_best - INFO - Optimization finished | best cost: 1140.7718062400818, best pos: [3.80742996e+00 3.18255977e+03 1.24891505e-01 2.06427752e+00]
+2023-07-07 02:01:32,694 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 02:01:32,700 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 02:01:32,712 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 02:01:46,427 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7f89a9f03130> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 02:01:47,336 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7f89a9f2add0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 02:02:34,007 - pyswarms.single.local_best - INFO - Optimization finished | best cost: 414.2560809850693, best pos: [ 4.2648156  78.21374846  0.24978432  1.89451272]
+2023-07-07 03:06:42,417 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 03:06:42,428 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 03:06:42,444 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 03:07:02,584 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fc6f7a60dc0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:07:04,985 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fc6f7a33910> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:10:11,830 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 03:10:11,833 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 03:10:11,843 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 03:10:36,086 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd35910b880> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:10:40,520 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd350affd90> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:11:44,546 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 03:11:44,552 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 03:11:44,563 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 03:12:11,327 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fb6d08df5b0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:12:15,247 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fb6d2ebbac0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 03:14:43,246 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 03:14:43,250 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 03:14:43,260 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 03:15:57,032 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 03:15:57,035 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 03:15:57,045 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 13:43:01,550 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 13:43:01,556 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 13:43:01,588 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 13:43:09,240 - tensorflow - WARNING - 5 out of the last 5 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd7a7589120> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 13:43:10,538 - tensorflow - WARNING - 6 out of the last 6 calls to <function Model.make_test_function.<locals>.test_function at 0x7fd7a755fd00> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2023-07-07 13:47:33,431 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 13:47:33,435 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 13:47:33,447 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
+2023-07-07 13:50:13,525 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-07 13:50:13,529 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-07 13:50:13,540 - pyswarms.single.local_best - INFO - Optimize for 10 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
