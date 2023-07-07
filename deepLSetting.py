@@ -110,7 +110,7 @@ class DeepLSetting:
         data = data.copy()
         options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2} #パラメータを設定
         bounds=((3, 2, 0.1, 1), (10, 4096, 0.4, 5)) #範囲を指定
-        optimizer = ps.single.LocalBestPSO(n_particles=1000, dimensions=4, options=options, bounds=bounds)
+        optimizer = ps.single.LocalBestPSO(n_particles=5, dimensions=4, options=options, bounds=bounds)
         cost, pos = optimizer.optimize(self.func_ps, n_iter, verbose=1)
         f = open('sample.txt', 'w', encoding='UTF-8')
         f.write(f"cost:{cost}")

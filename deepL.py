@@ -56,8 +56,8 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
 
 dls = DeepLSetting()
 dls.set_initial(40,2,[0,42])
-data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
-#data = pd.read_csv("/Users/inayoshikoya/Library/CloudStorage/OneDrive-国立大学法人東海国立大学機構/ドキュメント/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
+#data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
+data = pd.read_csv("/Users/inayoshikoya/Library/CloudStorage/OneDrive-国立大学法人東海国立大学機構/ドキュメント/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
@@ -65,11 +65,11 @@ data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
 pbounds = {
         'num_layer': (3,7),
-        'num_node': (1,2048),
+        'num_node': (1,4096),
         'dropout': (0.1,0.4),
-        'batch': (2,20)}
+        'batch': (2,10)}
 options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2}
-dls.psoOpt(data, 20000, 100)
+dls.psoOpt(data, 5000, 100)
 #dls.bayesOpt(data , pbounds=pbounds, num_epoch=5000)
 
 
