@@ -45,16 +45,6 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     #model.add(Dense(2))
     #model.compile(loss='mean_squared_error', optimizer=opt.Adam(), metrics=["mae"])
 
-    # プロセスごとにバッチサイズを調整
-    train_batch_size = batch
-    train_batch_size *= hvd.size()
-
-    # データジェネレータやデータセットの準備
-
-    # 分散トレーニング用のデータセットを作成
-    train_dataset = tf.data.Dataset.from_tensor_slices((X_train, y_train)).shuffle(10000).batch(train_batch_size)
-    train_dataset = train_dataset.repeat().prefetch(tf.data.experimental.AUTOTUNE)
-    train_dataset = hvd.DistributedDataset(train_dataset)
     callbacks = [
     # Horovod: broadcast initial variable states from rank 0 to all other processes.
     # This is necessary to ensure consistent initialization of all workers when
@@ -65,7 +55,7 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     if hvd.rank() == 0:
         callbacks.append(keras.callbacks.ModelCheckpoint('./checkpoint-{epoch}.h5'))
 
-    history = dls.model.fit(train_dataset, batch_size=train_batch_size, epochs=num_epoch//hvd.size(), verbose=1 if hvd.rank() == 0 else 0)
+    history = dls.model.fit(X_train, y_train, steps_per_epoch=2//hvd.size(), epochs=num_epoch, verbose=1 if hvd.rank() == 0 else 0)
     score = dls.model.evaluate(X_test, y_test, verbose=0)
     
     if plot:
