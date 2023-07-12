@@ -12,6 +12,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 import pyswarms as ps
 from pyswarms.utils.search import GridSearch
+import horovod.keras as hvd
 #機械学習のハイパーパラメータ、学習方法などをまとめたクラス。
 class DeepLSetting:
     
@@ -46,10 +47,12 @@ class DeepLSetting:
 
     #モデルをコンパイルする。
     def model_compile(self, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), metrics_tmp=["mae"]):
+        optimizer_tmp = hvd.DistributedOptimizer(optimizer_tmp)
         self.model.compile(
         loss = loss_tmp,
         optimizer=optimizer_tmp,
-        metrics=metrics_tmp)
+        metrics=metrics_tmp,
+        experimental_run_tf_function=False)
 
     #ベイズ最適化用の関数
     def func(self, num_layer, num_node, dropout, batch, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):

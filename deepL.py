@@ -8,7 +8,7 @@ from deepLSetting import DeepLSetting
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 import keras.optimizers as opt
-from keras.utils import np_utils
+import keras
 from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 from skopt import gp_minimize
@@ -25,14 +25,6 @@ for gpu in gpus:
     tf.config.experimental.set_memory_growth(gpu, True)
 if gpus:
     tf.config.experimental.set_visible_devices(gpus[hvd.local_rank()], 'GPU')
-    
-# TensorFlowの設定
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-config.gpu_options.visible_device_list = str(hvd.local_rank())
-
-# TensorFlowセッションをHorovod用に設定
-tf.keras.backend.set_session(tf.Session(config=config))
 
 #csvを受け取って、トレーニングを行う。
 def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=True, k_fold=False):
@@ -52,27 +44,28 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     #model.add(Dropout(0.2))
     #model.add(Dense(2))
     #model.compile(loss='mean_squared_error', optimizer=opt.Adam(), metrics=["mae"])
-    
-    # 分散トレーニングの設定
-    callbacks = [
-        hvd.callbacks.BroadcastGlobalVariablesCallback(0),  # モデルの重みを全てのプロセスで共有
-        hvd.callbacks.MetricAverageCallback(),  # メトリクスの平均を取る
-    ]
 
     # プロセスごとにバッチサイズを調整
-    train_batch_size = 10
+    train_batch_size = batch
     train_batch_size *= hvd.size()
 
     # データジェネレータやデータセットの準備
 
     # 分散トレーニング用のデータセットを作成
     train_dataset = tf.data.Dataset.from_tensor_slices((X_train, y_train)).shuffle(10000).batch(train_batch_size)
-
-    # 分散トレーニングの設定
     train_dataset = train_dataset.repeat().prefetch(tf.data.experimental.AUTOTUNE)
     train_dataset = hvd.DistributedDataset(train_dataset)
+    callbacks = [
+    # Horovod: broadcast initial variable states from rank 0 to all other processes.
+    # This is necessary to ensure consistent initialization of all workers when
+    # training is started with random weights or restored from a checkpoint.
+    hvd.callbacks.BroadcastGlobalVariablesCallback(0),
+    ]
+    # Horovod: save checkpoints only on worker 0 to prevent other workers from corrupting them.
+    if hvd.rank() == 0:
+        callbacks.append(keras.callbacks.ModelCheckpoint('./checkpoint-{epoch}.h5'))
 
-    history = dls.model.fit(train_dataset, batch_size=batch, epochs=num_epoch, verbose=1)
+    history = dls.model.fit(train_dataset, batch_size=train_batch_size, epochs=num_epoch//hvd.size(), verbose=1 if hvd.rank() == 0 else 0)
     score = dls.model.evaluate(X_test, y_test, verbose=0)
     
     if plot:
