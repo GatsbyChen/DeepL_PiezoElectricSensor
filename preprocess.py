@@ -201,7 +201,7 @@ def get_oneWave(originalData: pd.DataFrame, allWaves_plot=False, oneWave_plot=Fa
         figure_one_ax = figure_one.add_subplot(1,1,1)
         figure_one_ax.set_title("Single Extracted From Original Data")
         figure_one_ax.plot(oneCycleDataCloseToAverage.get_data().iloc[:,0], oneCycleDataCloseToAverage.get_data().iloc[:,1])
-        figure_one.savefig(fileName+"_one")
+        figure_one.savefig(f"figures/{fileName}")
         plt.close()
         #plt.close()
     #最適な単一波を返す

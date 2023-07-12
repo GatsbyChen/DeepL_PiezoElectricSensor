@@ -46,12 +46,11 @@ class DeepLSetting:
 
     #モデルをコンパイルする。
     def model_compile(self, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), metrics_tmp=["mae"]):
-        with self.strategy.scope():
-            self.model.compile(
-            loss = loss_tmp,
-            optimizer=optimizer_tmp,
-            metrics=metrics_tmp)
-    
+        self.model.compile(
+        loss = loss_tmp,
+        optimizer=optimizer_tmp,
+        metrics=metrics_tmp)
+
     #ベイズ最適化用の関数
     def func(self, num_layer, num_node, dropout, batch, data=None, num_epoch=3000, loss_tmp='mean_squared_error', optimizer_tmp=opt.Adam(), k_fold=0):
         data_tmp = data.copy()
@@ -138,7 +137,5 @@ class DeepLSetting:
             all_test_loss.append(score[0])
         ave_all_test_loss = np.mean(all_test_loss)
         return ave_all_test_loss
-
-
 
 

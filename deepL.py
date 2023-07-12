@@ -13,6 +13,19 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 from skopt import gp_minimize
 from bayes_opt import BayesianOptimization
+import tensorflow as tf
+import horovod.keras as hvd
+
+# Horovod初期化
+hvd.init()
+
+# TensorFlowの設定
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+config.gpu_options.visible_device_list = str(hvd.local_rank())
+
+# TensorFlowセッションをHorovod用に設定
+tf.keras.backend.set_session(tf.Session(config=config))
 
 #csvを受け取って、トレーニングを行う。
 def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=True, k_fold=False):
@@ -32,7 +45,27 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     #model.add(Dropout(0.2))
     #model.add(Dense(2))
     #model.compile(loss='mean_squared_error', optimizer=opt.Adam(), metrics=["mae"])
-    history = dls.model.fit(X_train, y_train, batch_size=batch, epochs=num_epoch, verbose=1)
+    
+    # 分散トレーニングの設定
+    callbacks = [
+        hvd.callbacks.BroadcastGlobalVariablesCallback(0),  # モデルの重みを全てのプロセスで共有
+        hvd.callbacks.MetricAverageCallback(),  # メトリクスの平均を取る
+    ]
+
+    # プロセスごとにバッチサイズを調整
+    train_batch_size = 10
+    train_batch_size *= hvd.size()
+
+    # データジェネレータやデータセットの準備
+
+    # 分散トレーニング用のデータセットを作成
+    train_dataset = tf.data.Dataset.from_tensor_slices((X_train, y_train)).shuffle(10000).batch(train_batch_size)
+
+    # 分散トレーニングの設定
+    train_dataset = train_dataset.repeat().prefetch(tf.data.experimental.AUTOTUNE)
+    train_dataset = hvd.DistributedDataset(train_dataset)
+
+    history = dls.model.fit(train_dataset, batch_size=batch, epochs=num_epoch, verbose=1)
     score = dls.model.evaluate(X_test, y_test, verbose=0)
     
     if plot:
@@ -53,7 +86,7 @@ def deepL_keras(csv: pd.DataFrame, dls: DeepLSetting, num_epoch, batch, plot=Tru
     return -40000*score[0]
     
 
-
+"""
 dls = DeepLSetting()
 dls.set_initial(40,2,[0,42])
 #data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
@@ -71,22 +104,22 @@ pbounds = {
 options = {'c1': 0.8, 'c2': 0.8, 'w': 0.2, 'k': 3, 'p': 2}
 dls.psoOpt(data, 5000, 100)
 #dls.bayesOpt(data , pbounds=pbounds, num_epoch=5000)
-
-
 """
+
+
 dls = DeepLSetting()
-dls.set_initial(40,2,[0,44])
+dls.set_initial(40,2,[0,39])
 dls.set_modelLayerAndNode([40,512,512,2], dropout=0.2)
 dls.model_compile()
 dls.model.summary()
-data = pd.read_csv("/home/k_inayoshi/DeepL_PiezoElectricSensor/TrainingData/out0626.csv")
+data = pd.read_csv("TrainingData/out0626.csv")
 #データを正規化
 data["H"] = data["H"]/10
 data["H/A'B'"] = data["H/A'B'"]/100
 data["SBP"] = data["SBP"]/200
 data["DBP"] = data["DBP"]/200
-deepL_keras(data, dls, 100, 10, plot=True)#k_fold=5)
-"""
+deepL_keras(data, dls, 10000, 10, plot=True)#k_fold=5)
+
 
 
 

@@ -403,3 +403,19 @@ ValueError: Dimensions must be equal, but are 2 and 3 for '{{node mean_squared_e
 2023-07-07 17:06:46,795 - pyswarms.single.local_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9, 'k': 3, 'p': 2}
 2023-07-07 17:14:47,299 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
 2023-07-07 17:14:47,303 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:02:19,496 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:02:19,509 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:05:46,280 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:05:46,285 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:06:22,962 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:06:22,967 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:08:39,538 - tensorflow - INFO - Assets written to: my_model/assets
+2023-07-10 12:31:18,486 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:31:18,502 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:32:53,046 - tensorflow - INFO - Assets written to: my_model/assets
+2023-07-10 12:34:03,146 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:34:03,151 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:35:16,320 - tensorflow - INFO - Assets written to: my_model/assets
+2023-07-10 12:36:15,876 - tensorflow - WARNING - There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+2023-07-10 12:36:15,881 - tensorflow - INFO - Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+2023-07-10 12:46:50,637 - tensorflow - INFO - Assets written to: my_model/assets
